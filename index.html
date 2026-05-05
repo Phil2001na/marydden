@@ -239,9 +239,9 @@ footer { background:var(--ink); padding:2.8rem 5% 1.4rem; }
   background:var(--gl); border:1px solid var(--gm); padding:.24rem .72rem; border-radius:20px;
 }
 .chip-icon { color:var(--g); display:flex; }
-.hero-r { position:relative; overflow:hidden; min-height:420px; }
-.hero-r img { position:absolute; inset:0; animation:imgIn .9s var(--ease) both; }
-@keyframes imgIn { from{opacity:0;transform:scale(1.04)} to{opacity:1;transform:scale(1)} }
+.hero-r { position:relative; overflow:hidden; min-height:420px; background:var(--bg2); }
+.hero-r img { position:absolute; inset:0; opacity:0; transition:opacity .7s var(--ease), transform .7s var(--ease); transform:scale(1.04); }
+.hero-r img.loaded { opacity:1; transform:scale(1); }
 .hero-r::after {
   content:''; position:absolute; inset:0;
   background:linear-gradient(to right, var(--bg) 0%, rgba(246,251,248,.08) 16%, transparent 32%);
@@ -283,7 +283,9 @@ footer { background:var(--ink); padding:2.8rem 5% 1.4rem; }
 .ha-inner { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
 @media(max-width:820px) { .ha-inner { grid-template-columns:1fr; gap:3rem; } }
 .photo-stack { position:relative; }
-.pm { border-radius:12px; overflow:hidden; height:400px; box-shadow:0 20px 55px rgba(13,34,24,.13); }
+.pm { border-radius:12px; overflow:hidden; height:400px; box-shadow:0 20px 55px rgba(13,34,24,.13); background:var(--bg2); }
+.pm img { width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .7s var(--ease); }
+.pm img.loaded { opacity:1; }
 .ptag { position:absolute; top:1.2rem; left:-.7rem; background:var(--g); color:#fff; font-size:.6rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:.38rem .85rem; border-radius:0 4px 4px 0; box-shadow:0 3px 12px rgba(30,155,84,.3); }
 .feat-list { list-style:none; display:flex; flex-direction:column; gap:.7rem; margin:1.3rem 0 1.8rem; }
 .feat-item { display:flex; align-items:flex-start; gap:.7rem; font-size:.86rem; font-weight:300; color:var(--body); line-height:1.65; }
@@ -328,8 +330,9 @@ footer { background:var(--ink); padding:2.8rem 5% 1.4rem; }
   display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-top:3.5rem;
 }
 @media(max-width:640px) { .svc-photo-row { grid-template-columns:1fr; } }
-.svc-photo-card { position:relative; overflow:hidden; border-radius:12px; height:280px; }
-.svc-photo-card img { position:absolute; inset:0; transition:transform .7s var(--ease); }
+.svc-photo-card { position:relative; overflow:hidden; border-radius:12px; height:280px; background:var(--bg2); }
+.svc-photo-card img { position:absolute; inset:0; transition:transform .7s var(--ease), opacity .7s var(--ease); opacity:0; }
+.svc-photo-card img.loaded { opacity:1; }
 .svc-photo-card:hover img { transform:scale(1.04); }
 .svc-photo-card .cg-ov { position:absolute; inset:0; background:linear-gradient(to top, rgba(13,34,24,.7) 0%, transparent 55%); }
 .svc-photo-card .cg-lbl { position:absolute; bottom:1rem; left:1.2rem; font-family:var(--ff); font-size:1rem; font-style:italic; color:#fff; }
@@ -343,15 +346,18 @@ footer { background:var(--ink); padding:2.8rem 5% 1.4rem; }
 @media(max-width:820px) { .about-page-hero { grid-template-columns:1fr; min-height:auto; } }
 .about-inner { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; margin-bottom:4rem; }
 @media(max-width:820px) { .about-inner { grid-template-columns:1fr; gap:3rem; } }
-.about-main { border-radius:12px; overflow:hidden; height:440px; box-shadow:0 20px 55px rgba(13,34,24,.14); }
+.about-main { border-radius:12px; overflow:hidden; height:440px; box-shadow:0 20px 55px rgba(13,34,24,.14); background:var(--bg2); }
+.about-main img { width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .7s var(--ease); }
+.about-main img.loaded { opacity:1; }
 .about-float { margin-top:1.2rem; border-radius:10px; overflow:hidden; height:200px; box-shadow:0 8px 28px rgba(13,34,24,.12); }
 
 /* Clinic photo grid */
 .clinic-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
 @media(max-width:760px) { .clinic-grid { grid-template-columns:1fr 1fr; } }
 @media(max-width:480px)  { .clinic-grid { grid-template-columns:1fr; } }
-.cg { position:relative; overflow:hidden; border-radius:10px; height:260px; cursor:default; }
-.cg img { position:absolute; inset:0; transition:transform .7s var(--ease); }
+.cg { position:relative; overflow:hidden; border-radius:10px; height:260px; cursor:default; background:var(--bg2); }
+.cg img { position:absolute; inset:0; transition:transform .7s var(--ease), opacity .7s var(--ease); opacity:0; }
+.cg img.loaded { opacity:1; }
 .cg:hover img { transform:scale(1.04); }
 .cg-ov { position:absolute; inset:0; background:linear-gradient(to top, rgba(13,34,24,.65) 0%, transparent 55%); opacity:0; transition:opacity var(--t); }
 .cg:hover .cg-ov { opacity:1; }
@@ -451,7 +457,7 @@ footer { background:var(--ink); padding:2.8rem 5% 1.4rem; }
       </div>
     </div>
     <div class="hero-r">
-      <img src="receptionist desk.jpg" alt="Mary Dental Practice reception desk"/>
+      <img src="receptionist desk.jpg" alt="Mary Dental Practice reception desk" loading="eager"/>
     </div>
   </div>
 
@@ -941,6 +947,7 @@ function go(id) {
   });
   cur = id;
   setTimeout(() => {
+    initImgFades(target);
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); }
@@ -964,7 +971,18 @@ document.querySelectorAll('.page').forEach(pg => {
 function openMob()  { document.getElementById('mobNav').classList.add('open'); document.body.style.overflow = 'hidden'; }
 function closeMob() { document.getElementById('mobNav').classList.remove('open'); document.body.style.overflow = ''; }
 
-/* -- INITIAL REVEALS on Home ----------------------- */
+/* -- IMAGE LOAD FADES ------------------------------- */
+function initImgFades(root) {
+  (root || document).querySelectorAll('img').forEach(img => {
+    if (img.complete && img.naturalWidth) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', () => img.classList.add('loaded'), {once:true});
+      img.addEventListener('error', () => img.classList.add('loaded'), {once:true});
+    }
+  });
+}
+initImgFades();
 (function() {
   const obs = new IntersectionObserver(e => {
     e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('on'); obs.unobserve(x.target); } });
